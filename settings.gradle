@@ -1,0 +1,5 @@
+rootProject.name = 'refund-manager'
+
+include 'auth-server'
+include 'com.auth.server.api.config-server'
+include 'gateway'

@@ -1,4 +1,4 @@
-description = 'Gateway'
+description = 'Config Server'
 
 buildscript {
     apply from: '../dependencies.gradle'
@@ -23,11 +23,12 @@ dependencyManagement {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    //compile('org.springframework.cloud:spring-cloud-starter-consul-all')
-    compile('org.springframework.cloud:spring-cloud-starter-zuul')
-    //compile('org.springframework.cloud:spring-cloud-starter-zipkin')
 
-    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.6.RELEASE'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile('org.springframework.cloud:spring-cloud-config-server')
+    compile('org.springframework.cloud:spring-cloud-config-monitor')
+    compile('org.springframework.cloud:spring-cloud-starter-bus-amqp')
+    compile('org.springframework.cloud:spring-cloud-starter-eureka')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }

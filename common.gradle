@@ -1,0 +1,77 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+    maven {
+        url project.properties.artifactoryUri
+        artifactUrls [project.properties.artifactoryUri]
+        credentials {
+            username = project.properties.artifactoryUser
+            password = project.properties.artifactoryPassword
+        }
+    }
+    maven {
+        url "https://dl.bintray.com/ametiste-oss/maven"
+    }
+}
+
+configurations {
+    deployerJars
+}
+
+javadoc {
+    options {
+        encoding = 'UTF-8'
+        tags = [ "implNote:a:Implementation Note:"]
+    }
+}
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+uploadArchives {
+    repositories.mavenDeployer {
+        configuration = configurations.deployerJars
+        repository(url: project.properties.artifactoryUri) {
+            authentication(
+                    userName: project.properties.artifactoryUser,
+                    password: project.properties.artifactoryPassword
+            )
+        }
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn:javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
+}
+
+test.outputs.upToDateWhen {false}
+test.testLogging.showStandardStreams = true
+
+test {
+    afterTest { desc, result ->
+        println "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
+
+jar {
+    manifest.attributes['Implementation-Title'] = name
+    manifest.attributes['Implementation-Version'] = version
+    manifest.attributes['Implementation-Git-Revision'] = "unprovided"
+}

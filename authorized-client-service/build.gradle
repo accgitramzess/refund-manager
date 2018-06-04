@@ -1,4 +1,4 @@
-description = 'Gateway'
+description = 'Authorized Client Service'
 
 buildscript {
     apply from: '../dependencies.gradle'
@@ -23,10 +23,8 @@ dependencyManagement {
 }
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-actuator')
-    //compile('org.springframework.cloud:spring-cloud-starter-consul-all')
-    compile('org.springframework.cloud:spring-cloud-starter-zuul')
-    //compile('org.springframework.cloud:spring-cloud-starter-zipkin')
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.6.RELEASE'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.6.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'

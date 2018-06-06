@@ -1,9 +1,20 @@
+server:
+  port: 4000
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
 zuul:
   ignoredServices: '*'
   host:
     connect-timeout-millis: 20000
     socket-timeout-millis: 20000
-
   routes:
     auth-service:
         path: /uaa/**
@@ -15,6 +26,3 @@ zuul:
         url: http://authorized-client-service:5001
         stripPrefix: false
         sensitiveHeaders:
-
-server:
-  port: 4000

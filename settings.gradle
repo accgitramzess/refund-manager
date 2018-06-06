@@ -5,3 +5,5 @@ include 'authorized-client-service'
 include 'config-service'
 include 'gateway'
 include 'eureka'
+include 'zipkin-server'
+

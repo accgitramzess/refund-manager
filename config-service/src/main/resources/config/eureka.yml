@@ -1,0 +1,29 @@
+# spring.application.name
+# Unique name for Eureka server service
+#
+# eureka.client.serviceUrl.defaultZone
+# It consult with other Eureka server for sync the service registry as it is standalone mode I give the local server address.
+#
+# server.port
+# In which port server will be bound.
+#
+# eureka.client.register-with-eureka
+# This determines is this server register itself as client as I said earlier Eureka server is also act as client so that it  can sync the registry.The value false means prevent itself act as a client.
+# eureka.client.fetch-registry
+
+#eureka:
+#  instance:
+#    prefer-ip-address: true
+#  client:
+#    registerWithEureka: false
+#    fetchRegistry: false
+#    server:
+#      waitTimeInMsWhenSyncEmpty: 0
+
+server:
+  port: 8761
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:9091/eureka/

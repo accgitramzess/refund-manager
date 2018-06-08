@@ -1,0 +1,42 @@
+# Understanding Eureka <--> Configservice cycle - in case when you wanna register config server at eureka and eureka fetch some configs from config server
+#spring:
+#    cloud:
+#      enabled: true
+#    config:
+#      fail-fast: true
+#      discovery:
+#        enabled: true
+#        serviceId: configserver
+
+#In your Eureka bootstrap.yml:
+
+# spring:
+#   application:
+#     name: your_config_file_name
+#   cloud:
+#     config:
+#       enabled: true
+#       failFast: true
+#       uri: the_uri_of_the_config_server
+
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config
+  cloud:
+    config:
+      server:
+        native:
+          search-locations: classpath:/config
+  profiles:
+     active: native # look up configs from file system
+
+# Register config service in eureka server
+#eureka:
+#  client:
+#    region: default
+#    registryFetchIntervalSeconds: 5
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka/

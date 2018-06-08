@@ -1,14 +1,9 @@
 server:
-  port: 4000
+  port: 8072
 
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+ribbon:
+  ReadTimeout: 20000
+  ConnectTimeout: 20000
 
 zuul:
   ignoredServices: '*'
@@ -18,11 +13,13 @@ zuul:
   routes:
     auth-service:
         path: /uaa/**
+        # serviceId: ???
         url: http://auth-service:5000
         stripPrefix: false
         sensitiveHeaders:
     authorized-client-service:
         path: /uaa/**
+        #serviceId: ??? ебанная хуйня сука это ваш спринг клауд хуй просышь что куда и как аааааа
         url: http://authorized-client-service:5001
         stripPrefix: false
         sensitiveHeaders:

@@ -1,4 +1,4 @@
-description = 'Gateway'
+description = 'Gateway Server'
 
 buildscript {
     apply from: '../dependencies.gradle'
@@ -24,16 +24,26 @@ dependencyManagement {
 
 dependencies {
 
+    // Eenable dynamic routing, monitoring, resiliency and security.
     compile('org.springframework.cloud:spring-cloud-starter-zuul')
+
+    // Register at Eureka Server
     compile('org.springframework.cloud:spring-cloud-starter-eureka')
+
     compile('org.springframework.boot:spring-boot-starter-actuator')
 
-    // Enable our gateway microservice to send trace events to the Zipkin server.
+    // Enable Spring Cloud Bus
+    compile("org.springframework.cloud:spring-cloud-starter-bus-amqp")
+
+    // Enable microservice to send trace events to the Zipkin server.
+    // Exchange can happen by two ways.
+    //      1. Send directly to Zipkin server
+    //      2. Asynchronously through the message broker
     // Zipkin server - this is a distributed trace system that helps us collect data about the execution
     //                 time of all disparate services.
-    compile("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     compile('org.springframework.cloud:spring-cloud-starter-sleuth')
     compile('org.springframework.cloud:spring-cloud-sleuth-stream')
 
+    // For tests
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

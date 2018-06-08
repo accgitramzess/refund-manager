@@ -24,15 +24,22 @@ dependencyManagement {
 
 dependencies {
 
+    // ???
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.6.RELEASE'
 
-    // Enable our gateway microservice to send trace events to the Zipkin server.
+    // Enable Spring Cloud Bus
+    compile("org.springframework.cloud:spring-cloud-starter-bus-amqp")
+
+    // Enable microservice to send trace events to the Zipkin server.
+    // Exchange can happen by two ways.
+    //      1. Send directly to Zipkin server
+    //      2. Asynchronously through the message broker
     // Zipkin server - this is a distributed trace system that helps us collect data about the execution
     //                 time of all disparate services.
-    compile("org.springframework.cloud:spring-cloud-starter-bus-amqp")
     compile('org.springframework.cloud:spring-cloud-starter-sleuth')
     compile('org.springframework.cloud:spring-cloud-sleuth-stream')
 
+    // For tests
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '1.5.6.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

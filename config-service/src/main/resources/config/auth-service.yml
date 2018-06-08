@@ -1,6 +1,6 @@
 server:
-  context-path: /uaa
-  port: 5000
+  context-path: /auth
+  port: 8071
 
 eureka:
   instance:
@@ -10,12 +10,3 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-
-spring:
-  data:
-    mongodb:
-      host: auth-mongodb
-      username: user
-      password: ${MONGODB_PASSWORD}
-      database: piggymetrics
-      port: 27017

@@ -1,0 +1,38 @@
+version: '2.1'
+services:
+
+# Core infrastructure
+
+  gateway:
+    build: refund-manager/gateway
+    restart: always
+
+  eureka:
+    build: refund-manager/eureka
+    restart: always
+
+  config-service:
+    build: refund-manager/config-service
+    restart: always
+
+  auth-service:
+    build: refund-manager/auth-service
+    restart: always
+
+  zipkin:
+    build: refund-manager/zipkin-server
+    restart: always
+
+# Native
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    ports:
+      - 5672:5672
+
+
+# Business services
+
+  authorized-client-service:
+    build: refund-manager/authorized-client-service
+    restart: always

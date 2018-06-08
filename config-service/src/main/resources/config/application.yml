@@ -1,0 +1,5 @@
+spring:
+  rabbitmq:
+    host: rabbitmq
+
+spring.sleuth.sampler.percentage: 1.0

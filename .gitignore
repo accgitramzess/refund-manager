@@ -1,4 +1,8 @@
 .idea
 .idea/
+/.idea
 *.iml
 *.iws
+/build
+build/
+.gradle

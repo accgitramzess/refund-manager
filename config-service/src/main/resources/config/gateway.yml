@@ -12,14 +12,14 @@ zuul:
     socket-timeout-millis: 20000
   routes:
     auth-service:
-        path: /uaa/**
+        path: /auth/**
         # serviceId: ???
-        url: http://auth-service:5000
+        url: http://localhost:8071
         stripPrefix: false
         sensitiveHeaders:
     authorized-client-service:
         path: /uaa/**
         #serviceId: ??? ебанная хуйня сука это ваш спринг клауд хуй просышь что куда и как аааааа
-        url: http://authorized-client-service:5001
+        url: http://localhost:8073
         stripPrefix: false
         sensitiveHeaders:
